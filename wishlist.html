@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Intercambio Navideño 2024</title>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand:wght@300;400;500&display=swap");
+
+      body {
+        font-family: "Quicksand", Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        text-align: center;
+        background: linear-gradient(to bottom, #ffecd2, #fcb69f);
+        background-attachment: fixed;
+        color: #333;
+      }
+
+      header {
+        background-color: rgba(255, 99, 71, 0.9);
+        color: white;
+        padding: 20px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        font-family: "Pacifico", cursive;
+      }
+
+      #welcome-screen,
+      #wishlist-screen {
+        display: none;
+        padding: 20px;
+      }
+
+      .member {
+        margin: 10px;
+        padding: 10px;
+        border: 1px solid #ccc;
+        background-color: rgba(255, 255, 255, 0.8);
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s, transform 0.2s;
+        display: inline-block;
+        width: calc(100% - 40px);
+        max-width: 300px;
+        text-align: left;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        font-family: "Quicksand", sans-serif;
+      }
+
+      .member:hover {
+        background-color: #fdf5e6;
+        transform: scale(1.05);
+      }
+
+      #back-btn {
+        margin-top: 20px;
+        padding: 10px 20px;
+        background-color: rgba(255, 99, 71, 0.9);
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+
+      #back-btn:hover {
+        background-color: rgba(255, 69, 0, 0.9);
+      }
+
+      h2 {
+        color: #444;
+      }
+
+      ul {
+        list-style: none;
+        padding: 0;
+      }
+
+      ul li {
+        margin: 10px 0;
+        padding: 10px;
+        background-color: rgba(255, 255, 255, 0.9);
+        border-radius: 5px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        position: relative;
+        padding-left: 30px;
+      }
+
+      ul li::before {
+        content: "🎁";
+        position: absolute;
+        left: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+
+      ul li a {
+        margin-left: 10px;
+        color: #007bff;
+        text-decoration: none;
+        font-size: 0.9em;
+      }
+
+      ul li a:hover {
+        text-decoration: underline;
+      }
+
+      ul li a::before {
+        content: "🔗";
+        margin-right: 5px;
+      }
+
+      body::before {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: url("https://example.com/festive-background.jpg") no-repeat center center/cover;
+        opacity: 0.2;
+        z-index: -1;
+      }
+
+      .member::before {
+        content: "\1F384 "; /* Christmas tree icon */
+        margin-right: 10px;
+      }
+
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Intercambio Navideño 2024</h1>
+      <p>Familia Apodaca Váldez</p>
+    </header>
+
+    <div id="welcome-screen">
+      <h2>Bienvenidos a la lista de deseos</h2>
+      <p>Selecciona un integrante para ver su lista de deseos:</p>
+      <div id="member-list"></div>
+    </div>
+
+    <div id="wishlist-screen">
+      <p>Lista de deseos de</p>
+      <h2 id="member-name"></h2>
+      <ul id="wishlist"></ul>
+      <button id="back-btn">Regresar</button>
+    </div>
+
+    <script>
+      const members = [
+        {
+          name: "Gama",
+          wishlist: [
+            { item: "Difusor de aceites esenciales", link: "https://drive.google.com/file/d/1WAi9h5K9VrzTv-y7pN0iKDhxBVOd2tzd" },
+            { item: "Destornillador eléctrico", link: "https://drive.google.com/file/d/103hD4UvQr4442NrBjBl7wXV4tANi1GgB" },
+            { item: "Perfume", link: "https://drive.google.com/file/d/18A9LCX8hoiJsO_x1BF2ER6MrOTSBkYQw" },
+          ],
+        },
+        {
+          name: "Gamita",
+          wishlist: [
+            { item: "Esclava dorada de acero inoxidable", link: "" },
+            { item: "Polo color negro talla M" },
+          ],
+        },
+        {
+          name: "Leo",
+          wishlist: [{ item: "Legos" }, { item: "Juguetes de super héroes", link: "" }],
+        },
+        {
+          name: "Yenni",
+          wishlist: [{ item: "Suéter negro XL", link: "" }, { item: "Espejo para maquillaje" }],
+        },
+        {
+          name: "Freddy",
+          wishlist: [
+            { item: "Camisetita mexicana 18m", link: "" },
+            { item: "Juguete de madera" },
+            { item: "Algo de Winnie Pooh", link: "" },
+          ],
+        },
+        {
+          name: "Melanie",
+          wishlist: [
+            { item: "Libro", link: "" },
+            { item: "Algo de Hello kitty" },
+            { item: "Moños pequeños par", link: "" },
+          ],
+        },
+        {
+          name: "Marlen",
+          wishlist: [
+            { item: "Libro", link: "" },
+            { item: "Traste o macetero de Sonora" },
+            { item: "Coyotas o Empanaditas", link: "" },
+          ],
+        },
+        {
+          name: "Mike",
+          wishlist: [
+            { item: "Macetero hecho en Sonora", link: "" },
+            { item: "Bacanora" },
+            { item: "Algo se Sonora", link: "" },
+          ],
+        },
+        {
+          name: "Heira",
+          wishlist: [
+            {
+              item: 'Libro Percy Jackson IV "La batalla del laberinto", de Rick Riordan.',
+              link: "",
+            },
+            { item: "Suéter o sudadera de Harry Potter talla L o XL" },
+          ],
+        },
+        {
+          name: "LusMa",
+          wishlist: [{ item: "Pijama XL", link: "" }],
+        },
+        {
+          name: "Fernanda",
+          wishlist: [
+            { item: "Termo para agua (rosa)", link: "" },
+            { item: "Cartera o billetera rosa", link: "https://drive.google.com/file/d/1chnE0yJST6BL9UeoyTE8Nae2QvQcRaGB" },
+            { item: "Saco o sudadera talla L", link: "" },
+          ],
+        },
+        {
+          name: "Marcos",
+          wishlist: [{ item: "Camiseta 2XL", link: "" }],
+        },
+        {
+          name: "Rosa",
+          wishlist: [{ item: "Blusa talla G", link: "" }],
+        },
+      ];
+
+      members.sort((a, b) => a.name.localeCompare(b.name));
+
+      const welcomeScreen = document.getElementById("welcome-screen");
+      const wishlistScreen = document.getElementById("wishlist-screen");
+      const memberList = document.getElementById("member-list");
+      const wishlist = document.getElementById("wishlist");
+      const memberName = document.getElementById("member-name");
+      const backBtn = document.getElementById("back-btn");
+
+      function showWelcomeScreen() {
+        wishlistScreen.style.display = "none";
+        welcomeScreen.style.display = "block";
+      }
+
+      function showWishlistScreen(member) {
+        memberName.textContent = member.name;
+        wishlist.innerHTML = "";
+        member.wishlist.forEach((item) => {
+          const li = document.createElement("li");
+          li.textContent = item.item;
+          if (item.link) {
+            const a = document.createElement("a");
+            a.href = item.link;
+            a.target = "_blank";
+            a.textContent = "Ver";
+            li.appendChild(a);
+          }
+          wishlist.appendChild(li);
+        });
+        welcomeScreen.style.display = "none";
+        wishlistScreen.style.display = "block";
+      }
+
+      function populateMembers() {
+        members.forEach((member) => {
+          const div = document.createElement("div");
+          div.textContent = member.name;
+          div.className = "member";
+          div.addEventListener("click", () => showWishlistScreen(member));
+          memberList.appendChild(div);
+        });
+      }
+
+      backBtn.addEventListener("click", showWelcomeScreen);
+
+      // Initialize
+      populateMembers();
+      showWelcomeScreen();
+    </script>
+  </body>
+</html>
